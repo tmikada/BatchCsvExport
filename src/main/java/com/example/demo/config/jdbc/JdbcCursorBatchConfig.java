@@ -1,4 +1,4 @@
-package com.example.demo.config;
+package com.example.demo.config.jdbc;
 
 import javax.sql.DataSource;
 
@@ -14,6 +14,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.RowMapper;
 
+import com.example.demo.config.BaseConfig;
 import com.example.demo.domain.model.Employee;
 
 @Configuration
@@ -60,8 +61,8 @@ public class JdbcCursorBatchConfig extends BaseConfig {
 	}
 
 	/** Jobの生成(JDBC) */
-	@Bean
-	public Job csvImportJdbcJob() {
+	@Bean("JdbcCursorJob")
+	public Job exportJdbcCursorJob() {
 		return this.jobBuilderFactory.get("ExportJdbcCursorJob")
 				.incrementer(new RunIdIncrementer())
 				.start(exportJdbcCursorStep())
